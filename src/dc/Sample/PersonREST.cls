@@ -22,7 +22,8 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <Route Url="/persons/" Method="POST" Call="CreatePerson"/>
 <!-- Create random persons-->
 <Route Url="/persons/gen/:amount" Method="POST" Call="CreateRandomPersons"/>
-
+<!-- Search persons using vector similarity -->
+<Route Url="/persons/search/vector" Method="POST" Call="VectorSearch"/>
 
 </Routes>
 }
@@ -160,6 +161,48 @@ ClassMethod SwaggerSpec() As %Status
   Set swagger.info.version = "0.1"
   Set swagger.host = "localhost:52773"
   Return ..%ProcessResult($$$OK, swagger)
+}
+
+/// Search persons using vector similarity
+ClassMethod VectorSearch() As %Status
+{
+    Set tSC = $$$OK
+    Try {
+        Set data = %request.Content
+        Set query = data.query
+        Set k = $Get(data.k, 5)  // Number of results to return
+        
+        // Here you would generate embedding for the query
+        // For demo, we'll use random vector
+        Set vector = ##class(%Library.Vector).%New(384)
+        For i=1:1:384 {
+            Do vector.SetAt(i, $RANDOM(100)/100)
+        }
+        
+        Set sql = "SELECT TOP "_k_" ID, Name, Title, Company, "_
+                 "$VECTOR_DISTANCE(Embedding, ?) as Score "_
+                 "FROM dc_Sample.Person "_
+                 "ORDER BY Score"
+        
+        Set rs = ##class(%SQL.Statement).%ExecDirect(,sql,vector)
+        
+        Set results = []
+        While rs.%Next() {
+            Do results.%Push({
+                "id": (rs.ID),
+                "name": (rs.Name),
+                "title": (rs.Title),
+                "company": (rs.Company),
+                "score": (rs.Score)
+            })
+        }
+        
+        Write results.%ToJSON()
+        
+    } Catch ex {
+        Set tSC = ex.AsStatus()
+    }
+    Return tSC
 }
 
 }
