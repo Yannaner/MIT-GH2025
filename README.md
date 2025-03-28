@@ -166,13 +166,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## Contact
-- **Name**: [Your Name]
-- **Email**: [Your Email]
-- **GitHub**: [Yannaner](https://github.com/Yannaner)
-
----
-
 ## Acknowledgements
 - [intersystems-community/iris-rest-api-template](https://github.com/intersystems-community/iris-rest-api-template)
 - The InterSystems IRIS community for guidance and support.
