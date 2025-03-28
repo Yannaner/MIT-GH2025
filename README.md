@@ -1,138 +1,179 @@
-## intersystems-iris-rest-api-template
 
- [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/iris-rest-api-template)
- [![Quality Gate Status](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Firis-rest-api-template&metric=alert_status)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Firis-rest-api-template)
- <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/intersystems-community/iris-rest-api-template">
+<div align="center">
 
-This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
-It also has OPEN API spec, 
-can be developed with Docker and VSCode,
-can ve deployed as ZPM module.
+# MIT-GH2025-MedEx  
+Automating negotiation with Insurance Company
+
+[![Last Commit](https://img.shields.io/badge/last%20commit-March-blue.svg)](https://github.com/Yannaner/MIT-GH2025/commits)
+[![ObjectScript 61.7%](https://img.shields.io/badge/ObjectScript-61.7%25-orange.svg)](https://github.com/Yannaner/MIT-GH2025/search?l=objectscript)
+[![Languages 6](https://img.shields.io/badge/Languages-6-brightgreen.svg)](https://github.com/Yannaner/MIT-GH2025)
+
+Built with the tools and technologies:
+
+[![JSON](https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white)](https://www.json.org/)
+[![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=white)](https://www.npmjs.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![XML](https://img.shields.io/badge/XML-8B0000?logo=xml&logoColor=white)](https://www.w3.org/XML/)
+[![IRIS](https://img.shields.io/badge/IRIS-FF0080?logo=InterSystems&logoColor=white)](https://www.intersystems.com/products/intersystems-iris/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
+[![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![YAML](https://img.shields.io/badge/YAML-808080?logo=yaml&logoColor=white)](https://yaml.org/)
+
+</div>
+
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [Using ZPM](#using-zpm)
+  - [For Development](#for-development)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Development](#development)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+## Overview
+**MIT-GH2025** is a robust REST API application built with ObjectScript on InterSystems IRIS. Designed to handle seamless data search and management operations, this template leverages modern tools (Docker, VSCode, GitHub Actions, etc.) to simplify both development and deployment.
+
+---
+
+## Features
+- **CRUD Operations**: Prebuilt Create, Read, Update, and Delete endpoints.
+- **OpenAPI (Swagger) Docs**: Interactive documentation for streamlined testing.
+- **Containerization**: Easy setup via Docker Compose.
+- **VSCode Integration**: Quick ObjectScript development and debugging.
+- **ZPM Compatibility**: Straightforward installation into IRIS environments.
+
+---
 
 ## Prerequisites
-Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
+- [Git](https://git-scm.com/)
+- [Docker Desktop](https://www.docker.com/)
+- [Visual Studio Code](https://code.visualstudio.com/) with [ObjectScript Extension](https://marketplace.visualstudio.com/items?itemName=IRIS-Community.iris-objectscript)
 
-## Installation with ZPM
+---
 
+## Installation
+
+### Using ZPM
+Install the REST API module in your IRIS environment:
+```objectscript
 zpm:USER>install rest-api-template
-
-## Installation for development
-
-Create your repository from template.
-
-Clone/git pull the repo into any local directory e.g. like it is shown below (here I show all the examples related to this repository, but I assume you have your own derived from the template):
-
-```
-$ git clone git@github.com:intersystems-community/iris-rest-api-template.git
 ```
 
-Open the terminal in this directory and run:
+### For Development
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Yannaner/MIT-GH2025.git
+   ```
 
-```
-$ docker-compose up -d --build
-```
+2. **Run with Docker**:
+   ```bash
+   docker-compose up -d --build
+   ```
 
-or open the folder in VSCode and do the following:
-![rest](https://user-images.githubusercontent.com/2781759/78183327-63569800-7470-11ea-8561-c3b547ce9001.gif)
+3. **Access Swagger**:
+   - Navigate to: [http://localhost:52773/swagger-ui/index.html](http://localhost:52773/swagger-ui/index.html)
 
+---
 
-## How to Work With it
+## Usage
+Once your container is running, you can interact with the REST endpoints:
 
-This template creates /crud REST web-application on IRIS which implements 4 types of communication: GET, POST, PUT and DELETE aka CRUD operations.
-These interface works with a sample persistent class dc.Sample.Person.
+- **GET** all records:
+  ```
+  GET http://localhost:52773/crud/persons/all
+  ```
+- **GET** a record by ID:
+  ```
+  GET http://localhost:52773/crud/persons/{id}
+  ```
+- **POST** to create a new record:
+  ```
+  POST http://localhost:52773/crud/persons/
+  ```
+- **PUT** to update an existing record:
+  ```
+  PUT http://localhost:52773/crud/persons/{id}
+  ```
+- **DELETE** a record by ID:
+  ```
+  DELETE http://localhost:52773/crud/persons/{id}
+  ```
 
-Open http://localhost:52773/swagger-ui/index.html to test the REST API
-
-# Testing GET requests
-
-To test GET you need to have some data. You can create it with POST request (see below), or you can create some fake testing data. to do that open IRIS terminal or web terminal on /localhost:52773/terminal/  and call:
-
-```
-USER>do ##class(dc.Sample.Person).AddTestData(10)
-```
-This will create 10 random records in dc.Sample.Person class.
-
-
-You can get swagger Open API 2.0 documentation on:
-```
-localhost:52773/crud/_spec
-```
-
-This REST API exposes two GET requests: all the data and one record.
-To get all the data in JSON call:
-
-```
-localhost:52773/crud/persons/all
-```
-
-To request the data for a particular record provide the id in GET request like 'localhost:52773/crud/persons/id' . E.g.:
-
-```
-localhost:52773/crud/persons/1
-```
-
-This will return JSON data for the person with ID=1, something like that:
-
-```
-{"Name":"Elon Mask","Title":"CEO","Company":"Tesla","Phone":"123-123-1233","DOB":"1982-01-19"}
+To generate sample data, open the IRIS terminal or web terminal at `http://localhost:52773/terminal/` and run:
+```objectscript
+do ##class(dc.Sample.Person).AddTestData(10)
 ```
 
-# Testing POST request
+---
 
-Create a POST request e.g. in Postman with raw data in JSON. e.g.
-
+## API Documentation
+OpenAPI (Swagger) docs can be accessed at:
 ```
-{"Name":"Elon Mask","Title":"CEO","Company":"Tesla","Phone":"123-123-1233","DOB":"1982-01-19"}
-```
-
-Adjust the authorisation if needed - it is basic for container with default login and password for IRIR Community edition container
-
-and send the POST request to localhost:52773/crud/persons/
-
-This will create a record in dc.Sample.Person class of IRIS.
-
-# Testing PUT request
-
-PUT request could be used to update the records. This needs to send the similar JSON as in POST request above supplying the id of the updated record in URL.
-E.g. we want to change the record with id=5. Prepare in Postman the JSON in raw like following:
-
-```
-{"Name":"Jeff Besos","Title":"CEO","Company":"Amazon","Phone":"123-123-1233","DOB":"1982-01-19"}
+http://localhost:52773/crud/_spec
 ```
 
-and send the put request to:
+---
+
+## Development
+1. Open the project in VSCode.
+2. Confirm the **ObjectScript** extension is installed.
+3. Edit classes in `src/cls/` — your changes will be compiled automatically in the running container.
+
+---
+
+## Project Structure
 ```
-localhost:52773/crud/persons/5
+MIT-GH2025/
+├── .github/           # GitHub workflows
+├── .vscode/           # VSCode settings and launch config
+├── frontend/          # Optional frontend assets
+├── src/
+│   └── dc/Sample/     # Sample ObjectScript classes
+├── Dockerfile         # IRIS Docker build file
+├── docker-compose.yml # Docker Compose configuration
+├── README.md          # This README
+└── LICENSE            # MIT License
 ```
 
-# Testing DELETE request
+---
 
-For delete request this REST API expects only the id of the record to delete. E.g. if the id=5 the following DELETE call will delete the record:
+## Contributing
+1. Fork the repo.
+2. Create a new branch for your feature or fix.
+3. Ensure code meets project standards.
+4. Open a pull request with details of your changes.
 
-```
-localhost:52773/crud/persons/5
-```
+---
 
-## How to start coding
-This repository is ready to code in VSCode with ObjectScript plugin.
-Install [VSCode](https://code.visualstudio.com/) and [ObjectScript](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript) plugin and open the folder in VSCode.
-Open /src/cls/PackageSample/ObjectScript.cls class and try to make changes - it will be compiled in running IRIS docker container.
+## License
+This project is licensed under the [MIT License](LICENSE).
 
-Feel free to delete PackageSample folder and place your ObjectScript classes in a form
-/src/cls/Package/Classname.cls
+---
 
-The script in Installer.cls will import everything you place under /src/cls into IRIS.
+## Contact
+- **Name**: [Your Name]
+- **Email**: [Your Email]
+- **GitHub**: [Yannaner](https://github.com/Yannaner)
 
-## What's insde the repo
+---
 
-# Dockerfile
+## Acknowledgements
+- [intersystems-community/iris-rest-api-template](https://github.com/intersystems-community/iris-rest-api-template)
+- The InterSystems IRIS community for guidance and support.
 
-The simplest dockerfile to start IRIS and load ObjectScript from /src/cls folder
-Use the related docker-compose.yml to easily setup additional parametes like port number and where you map keys and host folders.
-
-# .vscode/settings.json
-
-Settings file to let you immedietly code in VSCode with [VSCode ObjectScript plugin](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript))
-
-# .vscode/launch.json
-Config file if you want to debug with VSCode ObjectScript
